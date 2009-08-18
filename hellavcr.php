@@ -265,8 +265,8 @@ function process_tv() {
                   curl_setopt($xbmc_ch, CURLOPT_RETURNTRANSFER, 1);
                   curl_setopt($xbmc_ch, CURLOPT_TIMEOUT, 5);
                   $result = curl_exec($xbmc_ch);
+                  print $config['debug_separator'] . 'XBMC notification ' . ($result ? 'ok' : 'FAILED. ' . curl_error($ch));
                   curl_close($xbmc_ch);
-                  print $config['debug_separator'] . 'XBMC notification ' . ($result ? 'ok' : 'FAILED');
                 }
 								
 								//send twitter update
@@ -756,9 +756,9 @@ function send_to_sabnzbd($newzbin_id, $isURL = false) {
     CURLOPT_RETURNTRANSFER => 1
   ));
   $result = curl_exec($ch);
+  print ($result ? 'sent' : 'FAIL ' . curl_error($ch) . ' (check sabnzbd is running and config values are correct)');
   curl_close($ch);
 
-  print ($result ? 'sent' : 'FAIL (check sabnzbd is running and config values are correct)');
   return $result;
 }
 
